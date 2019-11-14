@@ -1,11 +1,21 @@
 package lk.ijse.dep.pos.entity;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 public class Item implements SuperEntity{
 
+    @Id
     private String code;
     private String description;
+    @Column(name = "unit_price")
     private double unitPrice;
+    @Column(name = "qty_on_hand")
     private int qtyOnHand;
+    @OneToMany(mappedBy = "item", cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE, CascadeType.REFRESH})
+    private List<OrderDetail> orderDetails = new ArrayList<>();
 
     public Item() {
     }
@@ -47,6 +57,14 @@ public class Item implements SuperEntity{
 
     public void setQtyOnHand(int qtyOnHand) {
         this.qtyOnHand = qtyOnHand;
+    }
+
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void addOrderDetail(OrderDetail orderDetail){
+        orderDetails.add(orderDetail);
     }
 
     @Override
