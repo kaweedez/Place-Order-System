@@ -1,5 +1,5 @@
 .idea/**
 *.iml
-error.log
+*.log
 lib/**
 out/**
