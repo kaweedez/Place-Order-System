@@ -12,6 +12,11 @@ public class OrderDetailDAOImpl implements OrderDetailDAO {
     private Session session;
 
     @Override
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    @Override
     public boolean existsByItemCode(String itemCode) throws Exception {
         return  session.createNativeQuery("SELECT * FROM OrderDetail WHERE itemCode=?1").setParameter(1,itemCode).uniqueResult() !=null;
     }
