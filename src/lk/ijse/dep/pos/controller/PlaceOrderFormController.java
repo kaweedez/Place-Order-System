@@ -8,7 +8,6 @@ import lk.ijse.dep.pos.business.custom.OrderBO;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import lk.ijse.dep.pos.db.DBConnection;
 import lk.ijse.dep.pos.dto.CustomerDTO;
 import lk.ijse.dep.pos.dto.ItemDTO;
 import lk.ijse.dep.pos.dto.OrderDTO;

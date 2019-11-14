@@ -26,7 +26,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import lk.ijse.dep.pos.db.DBConnection;
 
 import java.io.*;
 import java.net.URL;
