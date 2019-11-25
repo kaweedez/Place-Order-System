@@ -9,7 +9,7 @@ import lk.ijse.dep.pos.entity.Order;
 import javax.persistence.EntityManager;
 import java.sql.ResultSet;
 
-public class OrderDAOImpl extends CrudDAOImpl<Order, String> implements OrderDAO {
+public class OrderDAOImpl extends CrudDAOImpl<Order, Integer> implements OrderDAO {
 
     private EntityManager entityManager;
 
