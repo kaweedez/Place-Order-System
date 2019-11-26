@@ -6,12 +6,13 @@ import lk.ijse.dep.pos.dao.custom.CustomerDAO;
 import lk.ijse.dep.pos.dao.custom.ItemDAO;
 import lk.ijse.dep.pos.entity.Item;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.sql.ResultSet;
 
-@Component
+@Repository
 public class ItemDAOImpl extends CrudDAOImpl<Item, String> implements ItemDAO {
 
     @Override
