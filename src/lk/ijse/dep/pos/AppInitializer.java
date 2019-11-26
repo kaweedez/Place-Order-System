@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import lk.ijse.dep.pos.db.JPAUtil;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -14,19 +16,20 @@ import java.util.logging.*;
 
 public class AppInitializer extends Application {
 
+    public static AnnotationConfigApplicationContext ctx;
+
     public static void main(String[] args) {
         launch(args);
-        try {
-            System.out.println("Shutting down the connection");
-            DBConnection.getInstance().getConnection().close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        System.out.println("Shutting down the connection");
+//        JPAUtil.getEntityManagerFactory().close();
     }
 
     @Override
     public void start(Stage primaryStage)  {
         try {
+            ctx = new AnnotationConfigApplicationContext();
+            ctx.register(AppConfig.class);
+            ctx.refresh();
 
             // Let's setup the root logger
             Logger rootLogger = Logger.getLogger("");
@@ -35,7 +38,6 @@ public class AppInitializer extends Application {
             fileHandler.setLevel(Level.INFO);
             rootLogger.addHandler(fileHandler);
 
-            DBConnection.getInstance().getConnection();
             URL resource = this.getClass().getResource("/lk/ijse/dep/pos/view/MainForm.fxml");
             Parent root = FXMLLoader.load(resource);
             Scene mainScene = new Scene(root);

@@ -5,24 +5,25 @@ import lk.ijse.dep.pos.dao.custom.CustomerDAO;
 import lk.ijse.dep.pos.dao.custom.OrderDAO;
 import lk.ijse.dep.pos.entity.Customer;
 import lk.ijse.dep.pos.entity.Order;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.sql.ResultSet;
 
+@Component
 public class OrderDAOImpl extends CrudDAOImpl<Order, Integer> implements OrderDAO {
-
-    private EntityManager entityManager;
 
     @Override
     public int getLastOrderId() throws Exception {
-        return (Integer) entityManager.createNativeQuery("SELECT id FROM `Order` ORDER BY id DESC LIMIT 1").getSingleResult();
-
+        Query nativeQuery = entityManager.createNativeQuery("SELECT id FROM `Order` ORDER BY id DESC LIMIT 1");
+        return nativeQuery.getResultList().size() > 0? (int) nativeQuery.getSingleResult() : 0;
     }
 
     @Override
     public boolean existsByCustomerId(String customerId) throws Exception {
-        return entityManager.createNativeQuery("SELECT * FROM `Order` WHERE id=?1")
-                .setParameter(1, customerId).getResultList() != null;
+        return entityManager.createNativeQuery("SELECT * FROM `Order` WHERE customer_id=?1")
+                .setParameter(1, customerId).getResultList().size() > 0;
     }
 
 }

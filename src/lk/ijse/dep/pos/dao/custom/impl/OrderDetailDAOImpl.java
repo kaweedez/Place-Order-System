@@ -6,17 +6,17 @@ import lk.ijse.dep.pos.dao.custom.OrderDetailDAO;
 import lk.ijse.dep.pos.entity.Customer;
 import lk.ijse.dep.pos.entity.OrderDetail;
 import lk.ijse.dep.pos.entity.OrderDetailPK;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import java.sql.ResultSet;
 
+@Component
 public class OrderDetailDAOImpl extends CrudDAOImpl<OrderDetail, OrderDetailPK> implements OrderDetailDAO {
-
-    private EntityManager entityManager;
 
     @Override
     public boolean existsByItemCode(String itemCode) throws Exception {
         return entityManager.createNativeQuery("SELECT * FROM OrderDetail WHERE item_code=?1")
-                .setParameter(1, itemCode).getResultList() != null;
+                .setParameter(1, itemCode).getResultList().size() > 0;
     }
 }

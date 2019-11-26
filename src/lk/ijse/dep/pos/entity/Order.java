@@ -17,7 +17,7 @@ public class Order implements SuperEntity{
 //    @JoinTable(name ="customer_order",
 //            joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
 //            inverseJoinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "customer_id"))
-    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
     @OneToMany(mappedBy = "order", cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private List<OrderDetail> orderDetails = new ArrayList<>();

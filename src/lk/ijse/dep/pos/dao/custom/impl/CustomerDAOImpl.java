@@ -3,17 +3,19 @@ package lk.ijse.dep.pos.dao.custom.impl;
 import lk.ijse.dep.pos.dao.CrudDAOImpl;
 import lk.ijse.dep.pos.dao.custom.CustomerDAO;
 import lk.ijse.dep.pos.entity.Customer;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
+@Component
 public class CustomerDAOImpl extends CrudDAOImpl<Customer, String> implements CustomerDAO {
-
-    private EntityManager entityManager;
 
     @Override
     public String getLastCustomerId() throws Exception {
 
-        return (String) entityManager.createNativeQuery("SELECT customerId FROM Customer ORDER BY customerId DESC LIMIT 1").getSingleResult();
-    }
+        Query nativeQuery = entityManager.
+                createNativeQuery("SELECT id FROM Customer ORDER BY id DESC LIMIT 1");
+        return nativeQuery.getResultList().size() > 0? (String) nativeQuery.getSingleResult() : null;    }
 
 }
