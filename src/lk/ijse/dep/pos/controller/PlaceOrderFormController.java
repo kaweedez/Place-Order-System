@@ -7,7 +7,6 @@ import lk.ijse.dep.pos.business.custom.OrderBO;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import lk.ijse.dep.pos.db.HibernateUtil;
 import lk.ijse.dep.pos.dto.CustomerDTO;
 import lk.ijse.dep.pos.dto.ItemDTO;
 import lk.ijse.dep.pos.dto.OrderDTO;
@@ -39,6 +38,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import lk.ijse.dep.pos.util.OrderDetailTM;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -346,8 +346,8 @@ public class PlaceOrderFormController {
             Map<String, Object> params = new HashMap<>();
             params.put("orderId", orderId + "");
 
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.doWork(connection -> {
+            SessionFactory sf = AppInitializer.ctx.getBean(SessionFactory.class);
+            sf.openSession().doWork(connection -> {
                 JasperPrint jasperPrint = null;
                 try {
                     jasperPrint = JasperFillManager.fillReport(jasperReport, params, connection);

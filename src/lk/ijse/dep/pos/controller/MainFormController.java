@@ -26,8 +26,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import lk.ijse.dep.pos.db.HibernateUtil;
-import static lk.ijse.dep.pos.db.HibernateUtil.*;
+import lk.ijse.dep.crypto.DEPCrypt;
+import lk.ijse.dep.pos.AppInitializer;
+import org.springframework.core.env.Environment;
+
 
 import java.io.*;
 import java.net.URL;
@@ -60,10 +62,35 @@ public class MainFormController implements Initializable {
     @FXML
     private Label lblDescription;
 
+    private Environment env;
+
+    private String getUsername(){
+        return DEPCrypt.decode(env.getRequiredProperty("hibernate.connection.username"),"dep4");
+    }
+
+    private String getPassword(){
+        return DEPCrypt.decode(env.getRequiredProperty("hibernate.connection.password"), "dep4");
+    }
+
+    private String getIp(){
+        return env.getRequiredProperty("ijse.dep.ip");
+    }
+
+    private String getPort(){
+        return env.getRequiredProperty("ijse.dep.port");
+    }
+
+    private String getDatabase(){
+        return env.getRequiredProperty("ijse.dep.db");
+    }
+
     /**
      * Initializes the lk.ijse.dep.pos.controller class.
      */
     public void initialize(URL url, ResourceBundle rb) {
+
+        env = AppInitializer.ctx.getBean(Environment.class);
+
         FadeTransition fadeIn = new FadeTransition(Duration.millis(2000), root);
         fadeIn.setFromValue(0.0);
         fadeIn.setToValue(1.0);
