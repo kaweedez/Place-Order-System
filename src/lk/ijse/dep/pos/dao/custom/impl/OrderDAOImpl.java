@@ -14,14 +14,14 @@ public class OrderDAOImpl extends CrudDAOImpl<Order, Integer> implements OrderDA
 
     @Override
     public int getLastOrderId() throws Exception {
-        return (int) session.createNativeQuery("SELECT id FROM `Order` ORDER BY id DESC LIMIT 1").uniqueResult();
+        return (int) getSession().createNativeQuery("SELECT id FROM `Order` ORDER BY id DESC LIMIT 1").uniqueResult();
 
     }
 
     @Override
     public boolean existsByCustomerId(String customerId) throws Exception {
 
-        return  session.createNativeQuery("SELECT * FROM `Order` WHERE id=?1").setParameter(1,customerId).uniqueResult() !=null;
+        return  getSession().createNativeQuery("SELECT * FROM `Order` WHERE id=?1").setParameter(1,customerId).uniqueResult() !=null;
 
     }
 

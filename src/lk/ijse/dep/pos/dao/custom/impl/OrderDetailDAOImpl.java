@@ -17,7 +17,7 @@ public class OrderDetailDAOImpl extends CrudDAOImpl<OrderDetail,OrderDetailPK> i
 
     @Override
     public boolean existsByItemCode(String itemCode) throws Exception {
-        return  session.createNativeQuery("SELECT * FROM OrderDetail WHERE itemCode=?1").setParameter(1,itemCode).uniqueResult() !=null;
+        return  getSession().createNativeQuery("SELECT * FROM OrderDetail WHERE itemCode=?1").setParameter(1,itemCode).uniqueResult() !=null;
     }
 
 }
