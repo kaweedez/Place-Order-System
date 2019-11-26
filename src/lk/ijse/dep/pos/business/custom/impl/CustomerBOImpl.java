@@ -4,7 +4,6 @@ import lk.ijse.dep.pos.business.custom.CustomerBO;
 import lk.ijse.dep.pos.business.exception.AlreadyExistsInOrderException;
 import lk.ijse.dep.pos.dao.custom.CustomerDAO;
 import lk.ijse.dep.pos.dao.custom.OrderDAO;
-import lk.ijse.dep.pos.db.JPAUtil;
 import lk.ijse.dep.pos.dto.CustomerDTO;
 import lk.ijse.dep.pos.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;

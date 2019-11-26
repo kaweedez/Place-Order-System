@@ -4,7 +4,6 @@ import lk.ijse.dep.pos.business.custom.ItemBO;
 import lk.ijse.dep.pos.business.exception.AlreadyExistsInOrderException;
 import lk.ijse.dep.pos.dao.custom.ItemDAO;
 import lk.ijse.dep.pos.dao.custom.OrderDetailDAO;
-import lk.ijse.dep.pos.db.JPAUtil;
 import lk.ijse.dep.pos.dto.ItemDTO;
 import lk.ijse.dep.pos.entity.Item;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,12 +61,7 @@ public class ItemBOImpl implements ItemBO {
     @Transactional(readOnly = true)
     @Override
     public String getLastItemCode() throws Exception {
-        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        itemDAO.setEntityManager(em);
-        em.getTransaction().begin();
         String lastItemCode = itemDAO.getLastItemCode();
-        em.getTransaction().commit();
-        em.close();
         return lastItemCode;
     }
 
