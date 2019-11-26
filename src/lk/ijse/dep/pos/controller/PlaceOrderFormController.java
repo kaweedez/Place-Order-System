@@ -347,7 +347,8 @@ public class PlaceOrderFormController {
             params.put("orderId", orderId + "");
 
             SessionFactory sf = AppInitializer.ctx.getBean(SessionFactory.class);
-            sf.openSession().doWork(connection -> {
+            Session session = sf.openSession();
+            session.doWork(connection -> {
                 JasperPrint jasperPrint = null;
                 try {
                     jasperPrint = JasperFillManager.fillReport(jasperReport, params, connection);
