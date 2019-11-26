@@ -19,7 +19,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource("file:/home/manura/IdeaProjects/hibernate layered-pos/layered-pos-hibernate/resources/application.properties")
+@PropertySource("file:${user.dir}/resources/application.properties")
 public class HibernateConfig {
     @Autowired
     private Environment env;
