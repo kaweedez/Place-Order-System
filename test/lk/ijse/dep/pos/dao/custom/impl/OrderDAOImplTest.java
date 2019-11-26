@@ -1,7 +1,7 @@
 package lk.ijse.dep.pos.dao.custom.impl;
 
-import lk.ijse.dep.pos.dao.DAOFactory;
-import lk.ijse.dep.pos.dao.DAOTypes;
+import lk.ijse.dep.pos.AppInitializer;
+import lk.ijse.dep.pos.business.custom.OrderBO;
 import lk.ijse.dep.pos.dao.custom.OrderDAO;
 
 class OrderDAOImplTest {
@@ -11,7 +11,7 @@ class OrderDAOImplTest {
     }
 
     void existsByCustomerId() throws Exception {
-        OrderDAO dao = DAOFactory.getInstance().getDAO(DAOTypes.ORDER);
+        OrderDAO dao = AppInitializer.ctx.getBean(OrderDAO.class);
         System.out.println(dao.existsByCustomerId("C101"));
     }
 }

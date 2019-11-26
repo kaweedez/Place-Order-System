@@ -8,8 +8,7 @@ import java.util.List;
 public class Customer implements SuperEntity{
 
     @Id
-    @Column(name ="customer_id")
-    private String customerId;
+    private String id;
     private String name;
     private String address;
     @OneToMany(mappedBy = "customer", cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE, CascadeType.REFRESH})
@@ -19,8 +18,8 @@ public class Customer implements SuperEntity{
     public Customer() {
     }
 
-    public Customer(String customerId, String name, String address) {
-        this.customerId = customerId;
+    public Customer(String id, String name, String address) {
+        this.id = id;
         this.name = name;
         this.address = address;
     }
@@ -41,11 +40,11 @@ public class Customer implements SuperEntity{
 
 
     public String getCustomerId() {
-        return customerId;
+        return id;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
+    public void setCustomerId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -92,7 +91,7 @@ public class Customer implements SuperEntity{
     @Override
     public String toString() {
         return "Customer{" +
-                "customerId='" + customerId + '\'' +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
 //                ", gender=" + gender +

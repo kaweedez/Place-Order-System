@@ -4,9 +4,11 @@ import lk.ijse.dep.pos.dao.CrudDAOImpl;
 import lk.ijse.dep.pos.dao.custom.OrderDAO;
 import lk.ijse.dep.pos.entity.Order;
 import org.hibernate.Session;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class OrderDAOImpl extends CrudDAOImpl<Order, Integer> implements OrderDAO {
 
     @Override
@@ -18,7 +20,7 @@ public class OrderDAOImpl extends CrudDAOImpl<Order, Integer> implements OrderDA
     @Override
     public boolean existsByCustomerId(String customerId) throws Exception {
 
-        return  session.createNativeQuery("SELECT * FROM `Order` WHERE customerId=?1").setParameter(1,customerId).uniqueResult() !=null;
+        return  session.createNativeQuery("SELECT * FROM `Order` WHERE id=?1").setParameter(1,customerId).uniqueResult() !=null;
 
     }
 
