@@ -4,6 +4,7 @@ import lk.ijse.dep.pos.entity.SuperEntity;
 import org.hibernate.Session;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -11,11 +12,12 @@ import java.util.List;
 public abstract class CrudDAOImpl<T extends SuperEntity, ID extends Serializable> implements CrudDAO<T, ID> {
 
     private Class<T> entity;
+    @PersistenceContext
     protected EntityManager entityManager;
 
     public CrudDAOImpl() {
-        entity = (Class<T>) (((ParameterizedType) (this.getClass().getGenericSuperclass())).getActualTypeArguments()[0]);
-    }
+        entity = (Class<T>)(((ParameterizedType)(this.getClass().getGenericSuperclass()))
+                .getActualTypeArguments()[0]);    }
 
     @Override
     public void setEntityManager(EntityManager entiryManager) {

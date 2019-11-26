@@ -1,6 +1,7 @@
 package lk.ijse.dep.pos;
 
 import lk.ijse.dep.crypto.DEPCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -22,12 +23,14 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class JPAConfig {
 
+    @Autowired
     private Environment env;
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(DataSource ds, JpaVendorAdapter jpaAdapter){
         LocalContainerEntityManagerFactoryBean lcemfb = new LocalContainerEntityManagerFactoryBean();
         lcemfb.setDataSource(ds);
+        lcemfb.setPackagesToScan("lk.ijse.dep.pos.entity");
         lcemfb.setJpaVendorAdapter(jpaAdapter);
         return lcemfb;
     }
@@ -47,11 +50,12 @@ public class JPAConfig {
         HibernateJpaVendorAdapter jpaAdapter = new HibernateJpaVendorAdapter();
         jpaAdapter.setDatabase(Database.MYSQL);
         jpaAdapter.setDatabasePlatform(env.getRequiredProperty("hibernate.dialect"));
-        jpaAdapter.setGenerateDdl(env.getRequiredProperty("hibernate.hbm2ddl.auto").equals("update"));
+        jpaAdapter.setGenerateDdl(env.getRequiredProperty("hibernate.hbm2ddl.auto").equals("update")?true:false);
         jpaAdapter.setShowSql(env.getRequiredProperty("hibernate.show_sql", Boolean.class));
         return jpaAdapter;
     }
 
+    @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
         return new JpaTransactionManager(emf);
     }
