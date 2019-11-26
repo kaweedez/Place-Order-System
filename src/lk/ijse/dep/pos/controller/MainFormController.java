@@ -26,6 +26,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.dep.crypto.DEPCrypt;
+import org.springframework.core.env.Environment;
 
 import java.io.*;
 import java.net.URL;
@@ -53,6 +55,27 @@ public class MainFormController implements Initializable {
     private Label lblMenu;
     @FXML
     private Label lblDescription;
+    private Environment env;
+
+    private String getUsername(){
+        return DEPCrypt.decode(env.getRequiredProperty("javax.persistence.jdbc.user"),"dep4");
+    }
+
+    private String getPassword(){
+        return DEPCrypt.decode(env.getRequiredProperty("javax.persistence.jdbc.password"), "dep4");
+    }
+
+    private String getIp(){
+        return env.getRequiredProperty("ijse.dep.ip");
+    }
+
+    private String getPort(){
+        return env.getRequiredProperty("ijse.dep.port");
+    }
+
+    private String getDatabase(){
+        return env.getRequiredProperty("ijse.dep.db");
+    }
 
     /**
      * Initializes the lk.ijse.dep.pos.controller class.
