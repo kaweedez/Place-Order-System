@@ -45,6 +45,7 @@ public class ItemBOImpl implements ItemBO {
 
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<ItemDTO> findAllItems() throws Exception {
         List<Item> allItems = itemDAO.findAll();
@@ -59,6 +60,7 @@ public class ItemBOImpl implements ItemBO {
 
     }
 
+    @Transactional(readOnly = true)
     @Override
     public String getLastItemCode() throws Exception {
 
@@ -67,6 +69,7 @@ public class ItemBOImpl implements ItemBO {
 
     }
 
+    @Transactional(readOnly = true)
     @Override
     public ItemDTO findItem(String itemCode) throws Exception {
         Item item = itemDAO.find(itemCode);
@@ -78,6 +81,7 @@ public class ItemBOImpl implements ItemBO {
 
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<String> getAllItemCodes() throws Exception {
 

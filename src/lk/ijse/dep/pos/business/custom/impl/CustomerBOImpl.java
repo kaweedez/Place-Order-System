@@ -43,6 +43,7 @@ public class CustomerBOImpl implements CustomerBO {
 
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<CustomerDTO> findAllCustomers() throws Exception {
 
@@ -55,6 +56,7 @@ public class CustomerBOImpl implements CustomerBO {
 
     }
 
+    @Transactional(readOnly = true)
     @Override
     public String getLastCustomerId() throws Exception {
         String lastCustomerId = customerDAO.getLastCustomerId();
@@ -62,6 +64,7 @@ public class CustomerBOImpl implements CustomerBO {
 
     }
 
+    @Transactional(readOnly = true)
     @Override
     public CustomerDTO findCustomer(String customerId) throws Exception {
         Customer customer = customerDAO.find(customerId);
@@ -71,6 +74,7 @@ public class CustomerBOImpl implements CustomerBO {
 
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<String> getAllCustomerIDs() throws Exception {
         List<Customer> customers = customerDAO.findAll();
