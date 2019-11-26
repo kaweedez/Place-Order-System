@@ -33,7 +33,7 @@ public class HibernateUtil {
 
         // (1)
         StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
-                .loadProperties("application.properties")
+                .loadProperties("resources/application.properties")
                 .applySetting("hibernate.connection.username", username)
                 .applySetting("hibernate.connection.password",password)
                 .build();
