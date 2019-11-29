@@ -341,11 +341,11 @@ public class PlaceOrderFormController {
         OrderDTO order = new OrderDTO(orderId, null, cmbCustomerId.getSelectionModel().getSelectedItem(), orderDetails);
         try {
             orderBO.placeOrder(order);
-            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(this.getClass().getResourceAsStream("/lk/ijse/dep/pos/report/order-report.jasper"));
-            Map<String, Object> params = new HashMap<>();
-            params.put("orderId", orderId + "");
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, DBConnection.getInstance().getConnection());
-            JasperViewer.viewReport(jasperPrint, false);
+//            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(this.getClass().getResourceAsStream("/lk/ijse/dep/pos/report/order-report.jasper"));
+//            Map<String, Object> params = new HashMap<>();
+//            params.put("orderId", orderId + "");
+//            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, DBConnection.getInstance().getConnection());
+//            JasperViewer.viewReport(jasperPrint, false);
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR,"Something went wrong, please contact DEPPO").show();
             Logger.getLogger("lk.ijse.dep.pos.controller").log(Level.SEVERE, null,e);
