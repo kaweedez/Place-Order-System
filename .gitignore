@@ -2,3 +2,4 @@
 *.iml
 *.log
 out/**
+*.log.lck
